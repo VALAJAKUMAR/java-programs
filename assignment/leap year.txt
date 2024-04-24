@@ -1,0 +1,26 @@
+public class Main {
+    public static void main(String[] args) {
+        // Year to be checked
+        int year = 1900;
+        boolean leap = false;
+
+        // If the year is divisible by 4
+        if (year % 4 == 0) {
+            // If the year is a century
+            if (year % 100 == 0) {
+                // If the year is divisible by 400, it's a leap year
+                if (year % 400 == 0)
+                    leap = true;
+                else
+                    leap = false;
+            } else
+                leap = true;
+        } else
+            leap = false;
+
+        if (leap)
+            System.out.println(year + " is a leap year.");
+        else
+            System.out.println(year + " is not a leap year.");
+    }
+}

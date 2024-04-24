@@ -1,0 +1,126 @@
+Custom LinkedList :
+
+
+
+class Node<T> {
+    T data;
+    Node<T> next;
+
+    public Node(T data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class CustomLinkedList<T> {
+    private Node<T> head;
+
+    public CustomLinkedList() {
+        this.head = null;
+    }
+
+    public void add(T data) {
+        Node<T> newNode = new Node<>(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node<T> current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+    }
+
+    public void display() {
+        Node<T> current = head;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+}
+
+// Example usage of CustomLinkedList
+public class Main {
+    public static void main(String[] args) {
+        CustomLinkedList<Integer> list = new CustomLinkedList<>();
+        list.add(10);
+        list.add(20);
+        list.add(30);
+        list.display(); // Output: 10 20 30
+    }
+}
+
+
+
+
+Custom HashMap :
+
+
+
+class CustomHashMap<K, V> {
+    private static final int INITIAL_CAPACITY = 16;
+    private Node<Entry<K, V>>[] buckets;
+
+    public CustomHashMap() {
+        buckets = new Node[INITIAL_CAPACITY];
+    }
+
+    public void put(K key, V value) {
+        int index = key.hashCode() % INITIAL_CAPACITY;
+        Node<Entry<K, V>> newNode = new Node<>(new Entry<>(key, value));
+
+        if (buckets[index] == null) {
+            buckets[index] = newNode;
+        } else {
+            Node<Entry<K, V>> current = buckets[index];
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+    }
+
+    public V get(K key) {
+        int index = key.hashCode() % INITIAL_CAPACITY;
+        Node<Entry<K, V>> current = buckets[index];
+        while (current != null) {
+            if (current.data.getKey().equals(key)) {
+                return current.data.getValue();
+            }
+            current = current.next;
+        }
+        return null;
+    }
+}
+
+class Entry<K, V> {
+    private K key;
+    private V value;
+
+    public Entry(K key, V value) {
+        this.key = key;
+        this.value = value;
+    }
+
+    public K getKey() {
+        return key;
+    }
+
+    public V getValue() {
+        return value;
+    }
+}
+
+// Example usage of CustomHashMap
+public class Main {
+    public static void main(String[] args) {
+        CustomHashMap<String, Integer> map = new CustomHashMap<>();
+        map.put("one", 1);
+        map.put("two", 2);
+        map.put("three", 3);
+        System.out.println(map.get("two")); // Output: 2
+    }
+}

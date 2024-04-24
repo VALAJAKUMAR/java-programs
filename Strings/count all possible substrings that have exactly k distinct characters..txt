@@ -1,0 +1,33 @@
+import java.util.*;
+
+public class SubstringsWithKDistinctChars {
+    
+    public static int countSubstringsWithKDistinctChars(String s, int k) {
+        int n = s.length();
+        int[] count = new int[26];
+        int result = 0;
+        
+        for (int i = 0; i < n; i++) {
+            int distinct = 0;
+            Arrays.fill(count, 0);
+            for (int j = i; j < n; j++) {
+                if (count[s.charAt(j) - 'a'] == 0) {
+                    distinct++;
+                }
+                count[s.charAt(j) - 'a']++;
+                
+                if (distinct == k) {
+                    result++;
+                }
+            }
+        }
+        
+        return result;
+    }
+
+    public static void main(String[] args) {
+        String S = "aba";
+        int K = 2;
+        System.out.println(countSubstringsWithKDistinctChars(S, K)); // Output: 3
+    }
+}

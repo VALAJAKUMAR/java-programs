@@ -1,0 +1,80 @@
+QUICK SORT :
+
+
+public class QuickSort {
+
+    public static void main(String[] args) {
+        int[] inputArray = {3, 6, 8, 10, 1, 2, 1};
+        quickSort(inputArray, 0, inputArray.length - 1);
+        System.out.print("Quick Sorted Array: ");
+        for (int num : inputArray) {
+            System.out.print(num + " ");
+        }
+    }
+
+    public static void quickSort(int[] arr, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition(arr, low, high);
+            quickSort(arr, low, pivotIndex - 1);
+            quickSort(arr, pivotIndex + 1, high);
+        }
+    }
+
+    public static int partition(int[] arr, int low, int high) {
+        int pivot = arr[high];
+        int i = low - 1;
+        for (int j = low; j < high; j++) {
+            if (arr[j] < pivot) {
+                i++;
+                swap(arr, i, j);
+            }
+        }
+        swap(arr, i + 1, high);
+        return i + 1;
+    }
+
+    public static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+}
+
+
+
+
+
+BOBBLE SORT :
+
+
+public class BubbleSort {
+
+    public static void main(String[] args) {
+        int[] inputArray = {64, 34, 25, 12, 22, 11, 90};
+        bubbleSort(inputArray);
+        System.out.print("Bubble Sorted Array: ");
+        for (int num : inputArray) {
+            System.out.print(num + " ");
+        }
+    }
+
+    public static void bubbleSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    swap(arr, j, j + 1);
+                }
+            }
+        }
+    }
+
+    public static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+}
+
+
+

@@ -1,0 +1,33 @@
+import java.util.*;
+
+public class BalancedParentheses {
+    
+    public static boolean isBalanced(String exp) {
+        Stack<Character> stack = new Stack<>();
+        
+        for (char c : exp.toCharArray()) {
+            if (c == '(' || c == '{' || c == '[') {
+                stack.push(c);
+            } else if (c == ')' && !stack.isEmpty() && stack.peek() == '(') {
+                stack.pop();
+            } else if (c == '}' && !stack.isEmpty() && stack.peek() == '{') {
+                stack.pop();
+            } else if (c == ']' && !stack.isEmpty() && stack.peek() == '[') {
+                stack.pop();
+            } else {
+                return false; // If any unmatched closing bracket found
+            }
+        }
+        
+        return stack.isEmpty(); // If stack is empty, all opening brackets are matched
+    }
+
+    public static void main(String[] args) {
+        String exp = "[()]{}{[()()]()}";
+        if (isBalanced(exp)) {
+            System.out.println("Balanced");
+        } else {
+            System.out.println("Unbalanced");
+        }
+    }
+}

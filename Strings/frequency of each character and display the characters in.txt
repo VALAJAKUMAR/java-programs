@@ -1,0 +1,35 @@
+import java.util.*;
+
+public class CharacterFrequency {
+
+    public static void main(String[] args) {
+        String input = "basecamp";
+        displayCharacterFrequency(input);
+    }
+
+    private static void displayCharacterFrequency(String input) {
+        Map<Character, Integer> frequencyMap = new HashMap<>();
+
+        // Count the frequency of each character
+        for (char c : input.toCharArray()) {
+            if (Character.isLetter(c)) { // Consider only alphabetical characters
+                char lowerCaseChar = Character.toLowerCase(c);
+                frequencyMap.put(lowerCaseChar, frequencyMap.getOrDefault(lowerCaseChar, 0) + 1);
+            }
+        }
+
+        // Sort the map by frequency (ascending) and then by character (alphabetical)
+        List<Map.Entry<Character, Integer>> sortedList = new ArrayList<>(frequencyMap.entrySet());
+        sortedList.sort((a, b) -> {
+            if (a.getValue().equals(b.getValue())) {
+                return Character.compare(a.getKey(), b.getKey());
+            }
+            return a.getValue().compareTo(b.getValue());
+        });
+
+        // Print the result
+        for (Map.Entry<Character, Integer> entry : sortedList) {
+            System.out.println(entry.getKey() + "-" + entry.getValue());
+        }
+    }
+}
